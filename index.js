@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const routes = require('./routes/routes')
+const cors = require('cors')
 require('dotenv').config()
 
 // init app
@@ -10,6 +11,10 @@ const app = express()
 const morgan = require('morgan')
 
 app
+	.options('*', cors());
+
+app
+	.use(cors())
 	.use(morgan('dev'))
 	.use('/api', routes)
 
