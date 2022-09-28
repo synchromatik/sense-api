@@ -22,7 +22,7 @@ app
 mongoose
 	.connect(process.env.mongourl, { useNewUrlParser: true })
 	.then(() => {
-		app.listen(3000, () => console.log('Server ready'))
+		app.listen(3001, () => console.log('Server ready'))
 	})
 	.catch(error => console.log(error))
 
