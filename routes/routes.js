@@ -8,13 +8,13 @@ const startOfDay = require('date-fns/startOfDay')
 router.get('/senzori', async (req, res) => {
   try {
     senzori = await inputs.find({})
-    senzori_latest = await inputs.find().sort({ _id: -1 }).limit(1)
-    senzori_send = {
+    senzoriLatest = await inputs.find().sort({ _id: -1 }).limit(1)
+    senzoriSend = {
       'total': senzori.length,
-      'latest': senzori_latest, 
+      'latest': senzoriLatest, 
       'results': senzori
     }
-    res.send(senzori_send)
+    res.send(senzoriSend)
   } catch (err){
     res.send(err)
   }
@@ -29,11 +29,11 @@ router.get('/senzori/:from/:to/:senzorType?', async (req, res) => {
           $lt: endOfDay(new Date(req.params.to))
       }
     }, req.params.senzorType ? req.params.senzorType : '')
-    senzori_send = {
+    senzoriSend = {
       'total' : senzori.length,
       'results' : senzori
       }
-    res.send(senzori_send)
+    res.send(senzoriSend)
   } catch (err) {
     res.send(err.stringValue)
   }
